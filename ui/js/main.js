@@ -52,10 +52,61 @@ d3.json("data/us.json",function (error,us) {
            return a !== b;
        }))
        .attr("id","state-borders")
-       .attr("d",path);
+       .attr("d",path)
+       .attr('class','states');
+  // g.selectAll('.super')
+  //      .data(topojson.feature(us, us.objects.states).features)
+  //      .enter().append('circle')
+  //      .attr('r',2)
+  //      .each(function (d) {
+  //          var lon = path.centroid(d);
+  //          d3.select(this)
+  //              .attr('cx',lon[0])
+  //              .attr('cy',lon[1])
+  //
+  //      });
+  var states = ["Arizona","Illinois","Indiana","NewYork","NorthCarolina","Nevada","Ohio","Pennsylvania", "SouthCarolina","Wisconsin"];
 
+  g.selectAll('.city')
+      .data(topojson.feature(us, us.objects.states).features)
+        .enter()
+        .append('image')
+        //.attr('d', path)
+        .attr('class', function(d) {
+            return 'state'
+        })
+        .attr('r', 1)
+      .each(function (d) {
+          var lon = path.centroid(d);
+          d3.select(this)
+              .attr('transform' ,function(d) {
+              return "translate(" + lon + ")";
+          })
+      });
+  d3.selectAll('.state')
+        .attr('xlink:href', function(d) {
+            if (states.indexOf(getinfo(d.id)[0]['state']) != -1) {
+                return ('img/taco.svg')
+            }
+            else{
+                return ('');
+            }
 
+        })
+        .attr('height', function(d) {
+            return '19'
+        })
+        .attr('width', '19')
+        .attr('x', '-14.5')
+        .attr('y', '-9.5')
+        .attr('class', function(d) {
+            return 'state_image'
+        });
 
+    d3.select('.state_image')
+        .attr('height', 40)
+        .attr('width', 40)
+        .attr('y', -20);
 });
 
 function clicked(d) {
