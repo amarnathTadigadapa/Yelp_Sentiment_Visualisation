@@ -316,3 +316,17 @@ textarea {
     stroke-linecap: round;
     pointer-events: none;
 }
+
+.neg_class{
+    width: 3%;
+}
+.pos_class{
+    width: 3%;
+}
+.custom_class{
+    width: 43%;
+}
+.happy_img{
+    width: 3%;
+    margin: 0.2%;
+}
