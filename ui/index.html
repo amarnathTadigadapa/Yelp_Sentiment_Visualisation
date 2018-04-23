@@ -24,8 +24,17 @@
             <div id="map" class="col-md-8">
 
             </div>
-            <div class="col-md-4"><h3> State Name:</h3><div id="state_name"></div><div id="cusine"></div></div>
+            <div class="col-md-4">
+                <h3 id="state_name_title"></h3>
+                <div id="state_name"></div>
+                <div id="cusine"></div> <br><br>
+                <div id="rest_info" class="pre-scrollable"></div>
+
+            </div>
+
         </div>
+
+    <div id="resto_name"> </div><div class="row" id="radial_chart"></div>
 
         <!--[if lte IE 9]>
 
@@ -39,7 +48,7 @@
         <script src="js/plugins.js"></script>
                 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
                 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-        <script src="//d3js.org/d3.v3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.js"></script>
         <script src="//d3js.org/topojson.v1.min.js"></script>
         <script src="js/main.js"></script>
 
@@ -49,9 +58,5 @@
             ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
         </script>
         <script src="https://www.google-analytics.com/analytics.js" async defer></script>
-
-
-
-
     </body>
 </html>
