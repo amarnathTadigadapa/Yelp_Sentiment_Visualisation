@@ -138,20 +138,20 @@ function resto_info(data){
     d3.select('#rest_info').html('');
     html_str  = '';
     $.each(data.top_5_cuisines,function(ind,obj){
-        html_str += '<h4><b>'+obj.name+'</h4></b><br>';
+        html_str += '<div class="col-md-4 col-sm-6 portfolio-item"><div class="portfolio-caption"><h4>'+obj.name+'</h4>';
         $.each(obj.top_5_restaurants,function (ind,resto) {
             {
                 $.each(business_data,function (ind,val) {
                     if (val.hasOwnProperty(resto)) {
                         bus_id = resto;
-                        onclick="draw(\''+resto+'\',)";
                         html_str += '<h5 onclick="draw(\''+resto+'\')">'+val[resto].name+'</h5>';
                     }
                 });
 
             }
-        });
 
+        });
+        html_str +='</div></div>'
     });
 
     const tableDiv = d3.select('#rest_info')
@@ -637,7 +637,9 @@ function clicked(d) {
             .style("stroke-width", 1.5 / k + "px");
         $("#state_name_title").html(state_info.state);
         $("#cusine").html('');
-        var state_data = {}
+        $("#state_wise_best_place").html(state_info.state);
+        $("#state_wise_sub_title").html("Best places in "+state_info.state);
+        var state_data = {};
         $.getJSON('data/state_data.json', function (obj) {
             $.each(obj, function (ind, val) {
                 if (val.id == d.id) {
