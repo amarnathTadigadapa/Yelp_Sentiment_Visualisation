@@ -37,7 +37,7 @@ d3.json('data/categorized_checkins.json', function (error,objs) {
    business_data = objs;
 });
 var states_id = [];
-d3.json('data/state_cuisine.json',function (error,states){
+d3.json('data/state_data.json',function (error,states){
     $.each(states, function(ind,val){
         states_id.push(val.id);
     });
@@ -89,13 +89,13 @@ d3.json("data/us.json",function (error,us) {
                     })
             });
 
-  d3.json('data/state_cuisine.json',function (error,states) {
+  d3.json('data/state_data.json',function (error,states) {
   d3.selectAll('.state')
         .attr('xlink:href', function(d) {
             var img_url = '';
             $.each(states,function(state,state_data) {
                 if (getinfo(d.id)[0].state==state_data.name){
-                    img_url = 'img/'+state_data.type+'.svg';
+                    img_url = 'img/'+state_data.top_cuisine+'.svg';
                 }
             });
             return(img_url);
