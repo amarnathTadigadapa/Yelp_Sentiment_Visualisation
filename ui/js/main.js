@@ -33,7 +33,7 @@ getinfo = function(id){
     return states_info[0].filter(function(z){return String(z.id) == id});
 };
 var business_data = [];
-d3.json('data/categorized_checkins.json', function (error,objs) {
+d3.json('data/categorized_checkins_with_attributes.json', function (error,objs) {
    business_data = objs;
 });
 var states_id = [];
@@ -175,7 +175,7 @@ function resto_info(data){
 
 // Draw Radial Graph
 function draw(bus_id,bus_name) {
-
+    var attributes = {};
     var margin = 0,
         width = 600,
         height = 600,
@@ -274,7 +274,7 @@ function draw(bus_id,bus_name) {
     //d3.csv(csv, function(error, data) {
     //var bus_id = "-4TMQnQJW1yd6NqGRDvAeA";
     var bus_name = '';
-    d3.json('data/categorized_checkins.json', function(error, data_new) {
+    d3.json('data/categorized_checkins_with_attributes.json', function(error, data_new) {
         var ldab= [];
         console.log(error);
         $.each(data_new,function(ind,val){
@@ -286,8 +286,10 @@ function draw(bus_id,bus_name) {
                         ldab.push({'category_label':days,'question_label': time,'value':''+value});
                     });
                 });
+                attributes = val[bus_id].attributes;
             }
         });
+
         $("#resto_name").html(bus_name);
         var data = ldab;
 
@@ -563,6 +565,36 @@ function draw(bus_id,bus_name) {
                 return "rotate(" + (i * 360 / numCatBars) + ")";
             });
     });
+    d3.json('data/categorized_checkins_with_attributes.json', function(error, data_new) {
+        $.each(data_new, function (ind, val) {
+            if (val.hasOwnProperty(bus_id)) {
+                bus_name = val[bus_id].name;
+                attributes = val[bus_id].attributes;
+                $("#key_features").html('');
+                $("#key_features").html('Key Features');
+                $('#attrib_table').html('');
+                var table = d3.select("#attrib_table");
+
+                var tr_alcohol = table.append('tr');
+
+                tr_alcohol.append('td').append('h5').text('Alcohol:');
+                tr_alcohol.append('td').append('h5').text(attributes.Alcohol);
+                var BusinessParking = table.append('tr');
+                BusinessParking.append('td').append('h5').text('Business Parking:');
+                BusinessParking.append('td').append('h5').text(attributes.BusinessParking);
+                var GoodForMeal = table.append('tr');
+                GoodForMeal.append('td').append('h5').text('Good For Meal:');
+                GoodForMeal.append('td').append('h5').text(attributes.GoodForMeal);
+                var Music = table.append('tr');
+                Music.append('td').append('h5').text('Music:');
+                Music.append('td').append('h5').text(attributes.Music);
+                var WheelchairAccessible = table.append('tr');
+                WheelchairAccessible.append('td').append('h5').text('Wheel chair Accessible:');
+                WheelchairAccessible.append('td').append('h5').text(attributes.WheelchairAccessible);
+            }
+        });
+    });
+
 }
 function wrapTextOnArc(text, radius) {
     // note getComputedTextLength() doesn't work correctly for text on an arc,
