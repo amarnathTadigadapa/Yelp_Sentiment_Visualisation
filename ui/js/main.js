@@ -1,4 +1,4 @@
-var width = 960,
+var width = 900,
     height = 500,
     centered;
 var projection = d3.geo.albersUsa()
@@ -140,7 +140,7 @@ function resto_info(data){
     var html_str_inside = '';
     $.each(data.top_5_cuisines,function(ind,obj){
         html_str += '<div class="col-md-6 col-sm-6 portfolio-item"><div class="portfolio-caption card" style="display: grid;box-shadow: 2px 5px;color: #777;"><h4 class="card-header" style="background-color: #fed136;">'+obj.name+'</h4><div class="card-body">';
-        html_str_1 +='<div class="portfolio-item"><div class="portfolio-caption card" style="display: grid;box-shadow: 2px 5px;color: #777;"><h4 class="card-header" style="background-color: #fed136;">'+obj.name+'</h4><div class="card-body">';
+        //html_str_1 +='<div class="portfolio-item"><div class="portfolio-caption card" style="display: grid;box-shadow: 2px 5px;color: #777;"><h4 class="card-header" style="background-color: #fed136;">'+obj.name+'</h4><div class="card-body">';
         var count = 0;
         $.each(obj.top_5_restaurants,function (ind,resto) {
             {
@@ -150,16 +150,16 @@ function resto_info(data){
                         bus_id = resto;
                         var bus_name = val[resto].name;
                         html_str += '<a href="javascript:delay(\'#radial_chart_div\')"><h5 onclick="draw(\''+resto+'\',\''+bus_name+'\')">'+val[resto].name+'</h5></a>';
-                        html_str_inside = '<a href="javascript:delay(\'#radial_chart_div\')"><h5 onclick="draw(\''+resto+'\',\''+bus_name+'\')">'+val[resto].name+'</h5></a>';
+                        //html_str_1 += '<a href="javascript:delay(\'#radial_chart_div\')"><h5 onclick="draw(\''+resto+'\',\''+bus_name+'\')">'+val[resto].name+'</h5></a>';
                         //html_str += "<a href=\"javascript:delay(\\'#radial_chart_div\\')\"><h5 onclick=\"draw(\\''+resto+'\\',\\''+bus_name+'\\')\">'+val[resto].name+'</h5></a>"
                     }
                 });
 
             }
         });
-        if (count ==1){
-            html_str =  html_str_1 + html_str_inside ;
-        }
+        // if (count ==1){
+        //     html_str =  html_str_1  ;
+        // }
         if(count<5){
             for(var i=0;i<5-count;i++){
                 html_str+='<a><h5></h5></a>'
