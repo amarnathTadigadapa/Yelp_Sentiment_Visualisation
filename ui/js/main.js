@@ -139,19 +139,27 @@ function resto_info(data){
     html_str  = '';
     $.each(data.top_5_cuisines,function(ind,obj){
         html_str += '<div class="col-md-4 col-sm-6 portfolio-item"><div class="portfolio-caption"><h4>'+obj.name+'</h4>';
+
         $.each(obj.top_5_restaurants,function (ind,resto) {
             {
+                var count = 0;
                 $.each(business_data,function (ind,val) {
                     if (val.hasOwnProperty(resto)) {
+                        count +=1;
                         bus_id = resto;
                         var bus_name = val[resto].name;
-                        html_str += '<a href="#radial_chart_div"><h5 onclick="draw(\''+resto+'\',\''+bus_name+'\')">'+val[resto].name+'</h5></a>';
+                        html_str += '<a href="javascript:delay(\'#radial_chart_div\')"><h5 onclick="draw(\''+resto+'\',\''+bus_name+'\')">'+val[resto].name+'</h5></a>';
+                        //html_str += "<a href=\"javascript:delay(\\'#radial_chart_div\\')\"><h5 onclick=\"draw(\\''+resto+'\\',\\''+bus_name+'\\')\">'+val[resto].name+'</h5></a>"
                     }
                 });
-
+                if(count<5){
+                    for(var i=0;i<5-count;i++){
+                        html_str+='<a><h5></h5></a>'
+                    }
+                }
             }
-
         });
+
         html_str +='</div></div>'
     });
 
@@ -663,3 +671,6 @@ function clicked(d) {
 }
 
 
+function delay (URL) {
+    setTimeout( function() { window.location = URL }, 500 );
+}
